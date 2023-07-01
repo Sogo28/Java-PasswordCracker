@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MainMenu {
   // Types d'attaques et types de mots de passe supportes
-  String[] attaqueTypes = { "Brute Force", "Dictionary" };
+  String[] attaqueTypes = { "Brute Force", "Dictionary", "Server Authentification" };
   String[] passwordTypes = { "simple", "hashed" };
 
   // Constructeur sans parametres
@@ -55,6 +55,12 @@ public class MainMenu {
       }
     } while (isPasswordGood == false);
     return response;
+  }
+
+  public String saisieUlr() {
+    Scanner userResponse = new Scanner(System.in);
+    System.out.println("Veuillez saisir l'url du site:");
+    return userResponse.nextLine();
   }
 
 }

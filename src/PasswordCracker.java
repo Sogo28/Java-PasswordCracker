@@ -9,16 +9,21 @@ public class PasswordCracker {
 
     // Définition du type d'attaque et du type mot de passe
     int attackType = mainMenu.attackTypeSelection();
-    int passwordType = mainMenu.passwordTypeSelection();
-    password.setType(passwordType);
+    if (attackType != 3) {
+      int passwordType = mainMenu.passwordTypeSelection();
+      password.setType(passwordType);
 
-    // Entrée du mot de passe par l'utilisateur : fonction permettant de faire le
-    // contrôle de saisie nécessaire selon le type de mot de passe et de l'attaque
-    // Définition du type de mot passe
-    password.passwordSettings(passwordType, attackType);
+      // Entrée du mot de passe par l'utilisateur : fonction permettant de faire le
+      // contrôle de saisie nécessaire selon le type de mot de passe et de l'attaque
+      // Définition du type de mot passe
+      password.passwordSettings(passwordType, attackType);
 
-    // Appel de la methode factory
-    PasswordCrackerFactory.crack(password, attackType);
+      // Appel de la methode factory
+      PasswordCrackerFactory.crack(password, attackType);
+    } else {
+      String url = mainMenu.saisieUlr();
+      PasswordCrackerFactory.crack(url);
+    }
 
   }
 }
