@@ -18,4 +18,9 @@ public class PasswordCrackerFactory {
     }
   }
 
+  public static void crack(String url) throws IOException {
+    System.out.println("*** Server Authentification attack en cours ***");
+    DictionaryAttack.dictionary(url);
+  }
+
 }
