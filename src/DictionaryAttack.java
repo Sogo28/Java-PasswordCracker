@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 public class DictionaryAttack {
   private static void dictionarySimple(Password password, long startTime) {
     // Exploitation du fichier csv
-    String cheminFichier = "../assets/dictionnaire/dictionnaire.csv";
+    String cheminFichier = "../assets/dictionnaires/dictionnaire.csv";
     BufferedReader br = null;
     String line = "";
     String cvsSplitBy = ";";
