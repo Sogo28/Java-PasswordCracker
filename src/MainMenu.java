@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MainMenu {
   // Types d'attaques et types de mots de passe supportes
   String[] attaqueTypes = { "Brute Force", "Dictionary", "Server Authentification" };
-  String[] passwordTypes = { "simple", "hashed" };
+  String[] passwordTypes = { "simple", "hashe" };
 
   // Constructeur sans parametres
   MainMenu() {
@@ -19,7 +19,7 @@ public class MainMenu {
 
       // Affichage des types de mots de passe crackables
       for (int i = 0; i < passwordTypes.length; i++) {
-        System.out.println("[" + (i + 1) + "]- Crack a " + passwordTypes[i] + " password.");
+        System.out.println("[" + (i + 1) + "]- Cracker un mot de passe " + passwordTypes[i]);
       }
 
       // Récupération de la réponse de l'utilisateur

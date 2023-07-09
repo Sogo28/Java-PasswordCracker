@@ -38,12 +38,12 @@ public class Password {
     if (passwordType == 1 && attackType == 1) {
       do {
         System.out.println(
-            "Please, enter the password that you wanna crack.\nNote** : You can only type 5 alphabetical characters ");
+            "Veuillez entrer le mot de passe que vous souhaitez craquer.\nRemarque : Vous ne pouvez saisir que 5 caractères alphabétiques.");
         password = input.nextLine();
         if (password.length() != 5) {
-          System.out.println("Error, invalid password ! (5 characters expected)");
+          System.out.println("Erreur, mot de passe invalide ! (La taille du mot de passe n'est pas de 5 caractères.)");
         } else if (password.matches(".*[0-9].*") == true) {
-          System.out.println("Error, invalid password ! (no digits are allowed)");
+          System.out.println("Erreur, mot de passe invalide (Les chiffres ne sont pas supportés.)");
         } else {
           isOk = true;
         }
@@ -51,21 +51,21 @@ public class Password {
     } else if (passwordType == 1 && attackType == 2) {
       do {
         System.out.println(
-            "Please, enter the password that you wanna crack.\nNote** : You can only type maximum 8 alpha-numerical characters ");
+            "Veuillez entrer le mot de passe que vous souhaitez craquer.\nRemarque** : Vous ne pouvez saisir que 8 caractères alphanumériques.");
         password = input.nextLine();
         if (password.length() > 8) {
-          System.out.println("Error, invalid password ! (no more than 8 characters expected)");
+          System.out.println("Erreur, mot de passe invalide (Vous ne devez pas dépasser 8 caractères alphanumériques)");
         } else {
           isOk = true;
         }
       } while (isOk == false);
     } else if (passwordType == 2 && attackType == 1) {
       System.out.println(
-          "Please, enter the password that you wanna crack.\nNote** : We only support md5 passwords, and hashed passwords should be 5 characters length. ");
+          "Veuillez entrer le mot de passe que vous souhaitez craquer.\nNote** : Nous ne prenons en charge que les mots de passe MD5, et les mots de passe hachés doivent avoir une longueur de 5 caractères.");
       password = input.nextLine();
     } else if (passwordType == 2 && attackType == 2) {
       System.out.println(
-          "Please, enter the password that you wanna crack.\nNote** : We only support md5 passwords, and hashed passwords should be max 8 characters length. ");
+          "Veuillez entrer le mot de passe que vous souhaitez craquer.\nNote** : Nous ne prenons en charge que les mots de passe MD5, et les mots de passe hachés doivent avoir une longueur maximale de 8 caractères.");
       password = input.nextLine();
     }
 
